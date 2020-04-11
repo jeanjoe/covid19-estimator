@@ -1,7 +1,7 @@
 const multiplier = (case1, case2) => case1 * case2;
 
 const powerCalculator = (timeToElapse, periodType) => {
-  let days = 0;
+  let days;
 
   switch (periodType) {
     case 'days':
@@ -38,13 +38,15 @@ const covid19ImpactEstimator = (data) => {
 
   return {
     data,
-    impact: {
-      currectlyInfected: currentImpactInfections,
-      infectionsByRequestedTime: currentImpactInfectionsByTime
-    },
-    severeImpact: {
-      currectlyInfected: currentSevereImpactInfections,
-      infectionsByRequestedTime: currentSevereImpactInfectionsByTime
+    estimate: {
+      impact: {
+        currectlyInfected: currentImpactInfections,
+        infectionsByRequestedTime: currentImpactInfectionsByTime
+      },
+      severeImpact: {
+        currectlyInfected: currentSevereImpactInfections,
+        infectionsByRequestedTime: currentSevereImpactInfectionsByTime
+      }
     }
   };
 };
