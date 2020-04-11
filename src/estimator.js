@@ -19,7 +19,7 @@ const powerCalculator = (timeToElapse, periodType) => {
   return (2 ** parseInt((days / 3), 10));
 };
 
-const percentageCalc = (percentage, value) => parseInt((percentage / 100), 10) * value;
+const percentageCalc = (percentage, value) => (percentage / 100) * value;
 
 const covid19ImpactEstimator = (data) => {
   const currentImpactInfections = multiplier(data.reportedCases, 10);
@@ -35,17 +35,17 @@ const covid19ImpactEstimator = (data) => {
 
   const impactSevereCaseBryRequestedTime = percentageCalc(
     15, currentImpactInfectionsByTime
-  );
+  ).toFixed(0);
   const servereImpactSevereCaseBryRequestedTime = percentageCalc(
     15, currentSevereImpactInfectionsByTime
-  );
+  ).toFixed(0);
 
   const impactHospitalBedsByRequestedTime = (
     percentageCalc(35, data.totalHospitalBeds) - impactSevereCaseBryRequestedTime
-  );
+  ).toFixed(0);
   const severeImpactHospitalBedsByRequestedTime = (
     percentageCalc(35, data.totalHospitalBeds) - servereImpactSevereCaseBryRequestedTime
-  );
+  ).toFixed(0);
 
   return {
     data,
@@ -64,4 +64,22 @@ const covid19ImpactEstimator = (data) => {
   };
 };
 
-export default covid19ImpactEstimator;
+// export default covid19ImpactEstimator;
+
+function call() {
+  const data = {
+    region: {
+      name: 'Africa',
+      avgAge: 19.7,
+      avgDailyIncomeInUSD: 5,
+      avgDailyIncomePopulation: 0.71
+    },
+    periodType: 'days',
+    timeToElapse: 22,
+    reportedCases: 528,
+    population: 66622705,
+    totalHospitalBeds: 1380614
+  };
+
+  console.log(covid19ImpactEstimator(data));
+}
