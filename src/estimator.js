@@ -2,12 +2,7 @@ const multiplier = (case1, case2) => case1 * case2;
 
 const powerCalculator = (timeToElapse, periodType) => {
   let days;
-
   switch (periodType) {
-    case 'days':
-      days = timeToElapse;
-      break;
-
     case 'weeks':
       days = timeToElapse * 7;
       break;
@@ -17,7 +12,7 @@ const powerCalculator = (timeToElapse, periodType) => {
       break;
 
     default:
-      days = 0;
+      days = timeToElapse;
       break;
   }
 
@@ -38,15 +33,13 @@ const covid19ImpactEstimator = (data) => {
 
   return {
     data,
-    estimate: {
-      impact: {
-        currectlyInfected: currentImpactInfections,
-        infectionsByRequestedTime: currentImpactInfectionsByTime
-      },
-      severeImpact: {
-        currectlyInfected: currentSevereImpactInfections,
-        infectionsByRequestedTime: currentSevereImpactInfectionsByTime
-      }
+    impact: {
+      currectlyInfected: currentImpactInfections,
+      infectionsByRequestedTime: currentImpactInfectionsByTime
+    },
+    severeImpact: {
+      currectlyInfected: currentSevereImpactInfections,
+      infectionsByRequestedTime: currentSevereImpactInfectionsByTime
     }
   };
 };
