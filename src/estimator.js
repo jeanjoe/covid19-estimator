@@ -35,10 +35,10 @@ const covid19ImpactEstimator = (data) => {
 
   const impactSevereCaseBryRequestedTime = percentageCalc(
     15, currentImpactInfectionsByTime
-  ).toFixed(0);
+  );
   const servereImpactSevereCaseBryRequestedTime = percentageCalc(
     15, currentSevereImpactInfectionsByTime
-  ).toFixed(0);
+  );
 
   const impactHospitalBedsByRequestedTime = (
     percentageCalc(35, data.totalHospitalBeds) - impactSevereCaseBryRequestedTime
