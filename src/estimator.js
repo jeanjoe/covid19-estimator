@@ -19,6 +19,8 @@ const powerCalculator = (timeToElapse, periodType) => {
   return (2 ** parseInt((days / 3), 10));
 };
 
+const percentageCalc = (percentage, value) => (percentage / 100) * value;
+
 const covid19ImpactEstimator = (data) => {
   const currentImpactInfections = multiplier(data.reportedCases, 10);
   const currentSevereImpactInfections = multiplier(data.reportedCases, 50);
@@ -31,15 +33,33 @@ const covid19ImpactEstimator = (data) => {
     powerCalculator(data.timeToElapse, data.periodType)
   );
 
+  const impactSevereCaseBryRequestedTime = percentageCalc(
+    15, currentImpactInfectionsByTime
+  );
+  const servereImpactSevereCaseBryRequestedTime = percentageCalc(
+    15, currentSevereImpactInfectionsByTime
+  );
+
+  const impactHospitalBedsByRequestedTime = (
+    data.totalHospitalBeds - impactSevereCaseBryRequestedTime
+  );
+  const severeImpactHospitalBedsByRequestedTime = (
+    data.totalHospitalBeds - servereImpactSevereCaseBryRequestedTime
+  );
+
   return {
     data,
     impact: {
       currentlyInfected: currentImpactInfections,
-      infectionsByRequestedTime: currentImpactInfectionsByTime
+      infectionsByRequestedTime: currentImpactInfectionsByTime,
+      severeCasesByRequestedTime: impactSevereCaseBryRequestedTime,
+      hospitalBedsByRequestedTime: impactHospitalBedsByRequestedTime
     },
     severeImpact: {
       currentlyInfected: currentSevereImpactInfections,
-      infectionsByRequestedTime: currentSevereImpactInfectionsByTime
+      infectionsByRequestedTime: currentSevereImpactInfectionsByTime,
+      severeCasesByRequestedTime: servereImpactSevereCaseBryRequestedTime,
+      hospitalBedsByRequestedTime: severeImpactHospitalBedsByRequestedTime
     }
   };
 };
