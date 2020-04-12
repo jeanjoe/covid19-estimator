@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19 Estimator</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-200">
+    <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+        <div class="flex items-center flex-shrink-0 text-white mr-6">
+          <a href="/" class="font-semibold text-xl tracking-tight">COVID-19 Estimator</a>
+        </div>
+    </nav>
+
+    <main class="w-full max-w-2xl mx-auto my-4">
+        <div class="px-4 shadow-sm border py-6 bg-white">
+            <form onsubmit="event.preventDefault(); submitEstimate(event);">
+                <div class="flex flex-wrap -mx-3 mb-3">
+                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="population">
+                            Population
+                        </label>
+                        <input data-population class="appearance-none block w-full rounded-0 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="population" type="number">
+                    </div>
+                    <div class="w-full md:w-1/2 px-3">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="timeToElapse">
+                            Time To Elapse
+                        </label>
+                        <input data-time-to-elapse class="appearance-none block w-full rounded-0 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="timeToElapse" type="number">
+                    </div>
+                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="population">
+                            Reported Cases
+                        </label>
+                        <input data-reported-cases class="appearance-none block w-full rounded-0 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="population" type="number">
+                    </div>
+                    <div class="w-full md:w-1/2 px-3">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="totalHospitalBeds">
+                            Total Hospital Beds
+                        </label>
+                        <input data-total-hospital-beds class="appearance-none block w-full rounded-0 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="totalHospitalBeds" type="number">
+                    </div>
+                </div>
+                <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="w-full px-3">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="periodType">
+                            Period Type
+                        </label>
+                        <div class="relative">
+                            <select data-period-type class="block appearance-none w-full border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="periodType">
+                                <option value="days">Days</option>
+                                <option value="weeks">Weeks</option>
+                                <option value="months">Months</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button data-go-estimator="" class="px-4 w-auto py-2 bg-teal-700 text-white my-2">Estimate</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="./assets/js/main.js" type="module"></script>
+</body>
+</html>
