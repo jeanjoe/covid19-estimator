@@ -25,7 +25,7 @@ const powerCalculator = (timeToElapse, periodType) => {
   return (2 ** parseInt((numberOfDays / 3), 10));
 };
 
-const percentageCalc = (percentage, value) => (percentage / 100) * value;
+const percentageCalc = (percentage, value) => parseInt((percentage / 100) * value, 10);
 
 const infectionsByRequestedTime = (infectionsByTime, percentage) => percentageCalc(
   percentage, infectionsByTime
