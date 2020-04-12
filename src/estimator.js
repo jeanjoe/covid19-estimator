@@ -25,11 +25,11 @@ const powerCalculator = (timeToElapse, periodType) => {
   return (2 ** parseInt((numberOfDays / 3), 10));
 };
 
-const percentageCalc = (percentage, value) => parseInt((percentage / 100) * value, 10);
+const percentageCalc = (percentage, value) => (percentage / 100) * value;
 
-const infectionsByRequestedTime = (infectionsByTime, percentage) => percentageCalc(
+const infectionsByRequestedTime = (infectionsByTime, percentage) => parseInt(percentageCalc(
   percentage, infectionsByTime
-);
+), 10);
 
 const covid19ImpactEstimator = (data) => {
   const currentImpactInfections = multiplier(data.reportedCases, 10);
