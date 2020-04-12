@@ -27,9 +27,9 @@ const powerCalculator = (timeToElapse, periodType) => {
 
 const percentageCalc = (percentage, value) => (percentage / 100) * value;
 
-const infectionsByRequestedTime = (infectionsByTime, percentage) => parseInt(percentageCalc(
+const infectionsByRequestedTime = (infectionsByTime, percentage) => percentageCalc(
   percentage, infectionsByTime
-), 10);
+);
 
 const covid19ImpactEstimator = (data) => {
   const currentImpactInfections = multiplier(data.reportedCases, 10);
@@ -76,12 +76,12 @@ const covid19ImpactEstimator = (data) => {
       infectionsByRequestedTime: currentImpactInfectionsByTime,
       severeCasesByRequestedTime: impactSevereCaseBryRequestedTime,
       hospitalBedsByRequestedTime: impactHospitalBedsByRequestedTime,
-      casesForICUByRequestedTime: infectionsByRequestedTime(
+      casesForICUByRequestedTime: parseInt(infectionsByRequestedTime(
         5, currentImpactInfectionsByTime
-      ),
-      casesForVentilatorsByRequestedTime: infectionsByRequestedTime(
+      ), 10),
+      casesForVentilatorsByRequestedTime: parseInt(infectionsByRequestedTime(
         2, currentImpactInfectionsByTime
-      ),
+      ), 10),
       dollarsInFlight: impactDollarsInFlight
     },
     severeImpact: {
