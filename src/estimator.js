@@ -1,25 +1,35 @@
 const multiplier = (case1, case2) => case1 * case2;
 
-const powerCalculator = (timeToElapse, periodType) => {
-  let days;
+const days = (timeToElapse, periodType) => {
+  let numberOfDays;
+
   switch (periodType) {
     case 'weeks':
-      days = timeToElapse * 7;
+      numberOfDays = timeToElapse * 7;
       break;
 
     case 'months':
-      days = timeToElapse * 30;
+      numberOfDays = timeToElapse * 30;
       break;
 
     default:
-      days = timeToElapse;
+      numberOfDays = timeToElapse;
       break;
   }
+  return numberOfDays;
+};
 
-  return (2 ** parseInt((days / 3), 10));
+const powerCalculator = (timeToElapse, periodType) => {
+  const numberOfDays = days(timeToElapse, periodType);
+
+  return (2 ** parseInt((numberOfDays / 3), 10));
 };
 
 const percentageCalc = (percentage, value) => (percentage / 100) * value;
+
+const infectionsByRequestedTime = (infectionsByTime, percentage) => percentageCalc(
+  percentage, infectionsByTime
+);
 
 const covid19ImpactEstimator = (data) => {
   const currentImpactInfections = multiplier(data.reportedCases, 10);
@@ -47,19 +57,45 @@ const covid19ImpactEstimator = (data) => {
     (percentageCalc(35, data.totalHospitalBeds) - servereImpactSevereCaseBryRequestedTime), 10
   );
 
+
+  const impactDollarsInFlight = parseInt(
+    (currentImpactInfectionsByTime * (
+      data.region.avgDailyIncomeInUSD * data.region.avgDailyIncomePopulation))
+    / days(data.timeToElapse, data.periodType), 10
+  );
+  const servereDollarsInFlight = parseInt(
+    (currentSevereImpactInfectionsByTime * (
+      data.region.avgDailyIncomeInUSD * data.region.avgDailyIncomePopulation))
+    / days(data.timeToElapse, data.periodType), 10
+  );
+
   return {
     data,
     impact: {
       currentlyInfected: currentImpactInfections,
       infectionsByRequestedTime: currentImpactInfectionsByTime,
       severeCasesByRequestedTime: impactSevereCaseBryRequestedTime,
-      hospitalBedsByRequestedTime: impactHospitalBedsByRequestedTime
+      hospitalBedsByRequestedTime: impactHospitalBedsByRequestedTime,
+      casesForICUByRequestedTime: infectionsByRequestedTime(
+        5, currentImpactInfectionsByTime
+      ),
+      casesForVentilatorsByRequestedTime: infectionsByRequestedTime(
+        2, currentImpactInfectionsByTime
+      ),
+      dollarsInFlight: impactDollarsInFlight
     },
     severeImpact: {
       currentlyInfected: currentSevereImpactInfections,
       infectionsByRequestedTime: currentSevereImpactInfectionsByTime,
       severeCasesByRequestedTime: servereImpactSevereCaseBryRequestedTime,
-      hospitalBedsByRequestedTime: severeImpactHospitalBedsByRequestedTime
+      hospitalBedsByRequestedTime: severeImpactHospitalBedsByRequestedTime,
+      casesForICUByRequestedTime: infectionsByRequestedTime(
+        5, currentSevereImpactInfectionsByTime
+      ),
+      casesForVentilatorsByRequestedTime: infectionsByRequestedTime(
+        2, currentSevereImpactInfectionsByTime
+      ),
+      dollarsInFlight: servereDollarsInFlight
     }
   };
 };
