@@ -21,7 +21,7 @@
 
     <main class="w-full max-w-2xl mx-auto my-4">
         <div class="px-4 shadow-sm border py-6 bg-white">
-            <form onsubmit="event.preventDefault(); submitEstimate(event);" id="estimatorForm">
+            <form onsubmit="event.preventDefault();" id="estimatorForm">
                 <div class="flex flex-wrap -mx-3 mb-3">
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2" for="population">
@@ -65,7 +65,7 @@
                         </div>
                     </div>
                 </div>
-                <input type="submit" data-go-estimator class="px-4 w-auto py-2 bg-teal-900 text-white my-2" value="Estimate">
+                <button type="submit" data-go-estimate class="px-4 w-auto py-2 bg-teal-900 text-white my-2">Estimate</button>
             </form>
         </div>
     </main>
