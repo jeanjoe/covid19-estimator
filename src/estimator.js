@@ -83,7 +83,7 @@ const covid19ImpactEstimator = (data) => ({
     casesForVentilatorsByRequestedTime: parseInt(infectionsByRequestedTime(
       2, currentImpactInfectionsByTime(data)
     ), 10),
-    dollarsInFlight: impactDollarsInFlight
+    dollarsInFlight: impactDollarsInFlight(data)
   },
   severeImpact: {
     currentlyInfected: currentSevereImpactInfections(data),
@@ -96,7 +96,7 @@ const covid19ImpactEstimator = (data) => ({
     casesForVentilatorsByRequestedTime: infectionsByRequestedTime(
       2, currentSevereImpactInfectionsByTime(data)
     ),
-    dollarsInFlight: servereDollarsInFlight
+    dollarsInFlight: servereDollarsInFlight(data)
   }
 });
 
